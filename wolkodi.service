@@ -1,0 +1,9 @@
+[Unit]
+Description=Kodi Remote Start
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /usr/lib/systemd/scripts/wolkodi
+
+[Install]
+WantedBy=multi-user.target
