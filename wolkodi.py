@@ -26,13 +26,18 @@ def main():
     while True:
         data, addr = sock.recvfrom(512) # buffer size is 512 bytes
         logger.info("UPD package from IP '%s'", addr[0])
-        p = subprocess.Popen(["systemctl", "status", "kodi"], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["cat", "/etc/issue"], stdout=subprocess.PIPE)
         out, err = p.communicate()
-        if "Active: active (running)" in str(out):
-            logger.info("kodi is already runnning. Nothing to do")  
+        if 'Arch Linux' in str(out):
+            if "Active: active (running)" in str(out):
+                logger.info("kodi is already runnning. Nothing to do")
+            else:
+                logger.info("Starting kodi...")
+                subprocess.Popen(['systemctl','start','kodi'])
+                logger.info("kodi has been started :-)")
         else:
-            logger.info("Starting kodi...")
-            subprocess.Popen(['systemctl','start','kodi'])
+            logger.info("Starting kodi (Raspbian)...")
+            subprocess.Popen(["/usr/bin/kodi"], stdout=subprocess.PIPE)
             logger.info("kodi has been started :-)")
             
 
