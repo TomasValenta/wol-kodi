@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import logging
+import platform
 import socket
 import subprocess
 from logging.handlers import TimedRotatingFileHandler
@@ -27,20 +28,29 @@ def main():
         data, addr = sock.recvfrom(512) # buffer size is 512 bytes
         logger.info("UPD package from IP '%s'", addr[0])
         sock.recv(1024*128)
-        p = subprocess.Popen(["cat", "/etc/issue"], stdout=subprocess.PIPE)
-        out, err = p.communicate()
-        if 'Arch Linux' in str(out):
+        distro, version,_ = platform.linux_distribution()
+
+        if distro.lower() == 'arch':
+            p = subprocess.Popen(["systemctl", "status", "kodi"], stdout=subprocess.PIPE)
+            out, err = p.communicate()
+
             if "Active: active (running)" in str(out):
-                logger.info("kodi is already runnning. Nothing to do")
+                logger.info("kodi is already running. Nothing to do")
             else:
-                logger.info("Starting kodi...")
+                logger.info("Starting kodi (Arch)...")
                 subprocess.Popen(['systemctl','start','kodi'])
                 logger.info("kodi has been started :-)")
-        else:
-            logger.info("Starting kodi (Raspbian)...")
-            subprocess.Popen(["/usr/bin/kodi"], stdout=subprocess.PIPE)
-            logger.info("kodi has been started :-)")
-            
+
+        elif distro.lower() == 'debian':
+            p = subprocess.Popen(["ps", "aux"], stdout=subprocess.PIPE)
+            out, err = p.communicate()
+            if "kodi.bin" in out:
+                logger.info("kodi is already running. Nothing to do")
+            else:
+                logger.info("Starting kodi (Debian)...")
+                subprocess.Popen(["/usr/bin/kodi"], stdout=subprocess.PIPE)
+                logger.info("kodi has been started :-)")
+
 
 if __name__ == "__main__":
     try:
