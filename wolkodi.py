@@ -26,6 +26,7 @@ def main():
     while True:
         data, addr = sock.recvfrom(512) # buffer size is 512 bytes
         logger.info("UPD package from IP '%s'", addr[0])
+        sock.recv(1024*128)
         p = subprocess.Popen(["cat", "/etc/issue"], stdout=subprocess.PIPE)
         out, err = p.communicate()
         if 'Arch Linux' in str(out):
