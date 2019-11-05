@@ -48,7 +48,7 @@ def main():
                 logger.info("kodi is already running. Nothing to do")
             else:
                 logger.info("Starting kodi (Debian)...")
-                subprocess.Popen(["/usr/bin/kodi"], stdout=subprocess.PIPE)
+                subprocess.Popen(["runuser", "-l", "pi", "-c", "/usr/bin/kodi"])
                 logger.info("kodi has been started :-)")
 
 
