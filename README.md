@@ -1,7 +1,7 @@
 # Wake up Kodi using Yatse, Kore or any other Remote!
 This script will allow you to start [kodi](http://kodi.tv/about/) on your media center using [yatse](http://yatse.tv/redmine/projects/yatse), [kore](http://kodi.wiki/view/Kore) or [any other](http://kodi.wiki/view/Official_Kodi_Remote/iOS) remote control. Once it is running, the script will be listening to any upcomming WoL message to run the command to start kodi service.
 
-The script has been successfully tested on [Raspbian (Jessie)](https://www.raspberrypi.org/downloads/raspbian/) and [archlinux ARM](http://archlinuxarm.org/) although it should work as well on any systemd based operating systems.
+The script has been successfully tested on [Raspbian (Buster)](https://www.raspberrypi.org/downloads/raspbian/) and [archlinux ARM](http://archlinuxarm.org/) although it should work as well on any systemd based operating systems.
 
 ## Prerequisites
 
