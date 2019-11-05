@@ -30,29 +30,29 @@ Anyway, it doesn't hurt to check the official [Quick set up guide](http://kodi.w
 
 Get the script and copy it onto /usr/lib/systemd/scripts/wolkodi
 ```
-wget -O /usr/lib/systemd/scripts/wolkodi https://raw.githubusercontent.com/danifr/wol-kodi/python/wolkodi.py
+sudo wget -O /usr/lib/systemd/scripts/wolkodi https://raw.githubusercontent.com/TomasValenta/wol-kodi/python/wolkodi.py
 ```
 Create a new systemd unit so the system can operate and manage the script.
 ```
-wget -O /usr/lib/systemd/system/wolkodi.service https://raw.githubusercontent.com/danifr/wol-kodi/python/wolkodi.service
+sudo wget -O /usr/lib/systemd/system/wolkodi.service https://raw.githubusercontent.com/TomasValenta/wol-kodi/python/wolkodi.service
 ```
 
 After these modifications, reload the systemd configuration.
 ```
-systemctl daemon-reload
+sudo systemctl daemon-reload
 ```
 
 ## Trying it out
 
 In order to test it, you can run it with the following command:
 ```
- systemctl start wolkodi &
+sudo systemctl start wolkodi &
 ```
 You should inmediately start seeing some logs on /var/log/wolkodi.log
 
 If you are happy with the script and you want it to be started automatically on bootup:
 ```
- systemctl enable wolkodi
+sudo systemctl enable wolkodi
 ```
 
 Andddd... you are done :)
